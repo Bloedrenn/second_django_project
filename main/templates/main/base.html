@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <ul>
+        {% for page in menu %}
+            <li><a href="{% url page.path_name %}">{{page.title}}</a></li>
+        {% endfor %}
+    </ul>
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

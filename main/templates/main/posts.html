@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<table border=1 align='center'>
+    <tr>
+        <th>Автор</th>
+        <th>Заголовок</th>
+        <th>Текст</th>
+        <th>Дата и время создания</th>
+        <th>Дата публикации</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td align='center'>{{post.author}}</td>
+        <td align='center'>{{post.title}}</td>
+        <td align='center'>{{post.text}}</td>
+        <td align='center'>{{post.created_date_time}}</td>
+        <td align='center'>{{post.publication_date}}</td>
+    <tr>
+    {% endfor %}
+</table>
+{% endblock content %}
