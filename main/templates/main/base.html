@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>{{title}}</title>
+</head>
+
 <body>
+    {% block head %}
+    {% endblock head %}
+
     <ul>
         {% for page in menu %}
-            <li><a href="{% url page.path_name %}">{{page.title}}</a></li>
+            <li><a href="{% url page.path_name %}">{{page.url_title}}</a></li>
         {% endfor %}
     </ul>
 
