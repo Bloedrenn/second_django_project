@@ -15,9 +15,9 @@ menu = [
 def get_posts(request):
     posts = Post.objects.all()
 
-    title = 'Посты' #
+    title = 'Посты'
 
-    context = {'menu': menu, 'title': title, 'posts': posts} # +'title': title
+    context = {'menu': menu, 'title': title, 'posts': posts}
 
     return render(request, template_name='main/posts.html', context=context)
 
@@ -46,7 +46,6 @@ def create_post(request):
 
         return render(request, 'main/create_post.html', context=context)
     
-    #
     if request.method == 'POST':
         form = PostForm(request.POST)
 
@@ -60,7 +59,6 @@ def create_post(request):
             post.publish()
 
             return get_posts(request)
-    #
 
 
 def contacts(request):
