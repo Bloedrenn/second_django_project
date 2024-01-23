@@ -75,9 +75,3 @@ def about(request):
     context = {'menu': menu, 'title': title}
 
     return render(request, 'main/about.html', context=context)
-
-
-#
-def xxx():
-    pass
-#
