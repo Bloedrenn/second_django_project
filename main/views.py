@@ -5,6 +5,7 @@ from .forms import PostForm
 # Create your views here.
 
 menu = [
+    {'url_title': 'Блог', 'path_name': 'main:index'},
     {'url_title': 'Посты', 'path_name': 'main:get_posts'},
     {'url_title': 'Создать пост', 'path_name': 'main:create_post'},
     {'url_title': 'Контакты', 'path_name': 'main:contacts'},
@@ -47,7 +48,7 @@ def create_post(request):
         return render(request, 'main/create_post.html', context=context)
     
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
             post = Post()
@@ -55,10 +56,21 @@ def create_post(request):
             post.author = form.cleaned_data['author']
             post.title = form.cleaned_data['title']
             post.text = form.cleaned_data['text']
+            post.image = form.cleaned_data['image']
             
             post.publish()
 
             return get_posts(request)
+        
+
+def get_post(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    title = f'{post.title}'
+
+    context = {'menu': menu, 'title': title, 'post': post}
+
+    return render(request, 'main/post.html', context=context)
 
 
 def contacts(request):

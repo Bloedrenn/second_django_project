@@ -7,7 +7,8 @@ from django.utils import timezone
 class Post(models.Model):
     author = models.CharField(max_length=50, verbose_name='Автор')
     title = models.CharField(max_length=100, verbose_name='Заголовок')
-    text = models.TextField(blank=True, verbose_name='Текст')
+    text = models.TextField(blank=True, null=True, verbose_name='Текст поста')
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True, verbose_name='Изображение поста')
     created_date_time = models.DateTimeField(default=timezone.now, editable=False)
     publication_date = models.DateTimeField(null=True, editable=False)
 

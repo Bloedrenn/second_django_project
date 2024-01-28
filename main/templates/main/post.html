@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% load thumbnail %}
+
+{% block head %}
+<h1>Информация о посте</h1>
+{% endblock head %}
+
+{% block content %}
+<p>Автор - {{post.author}}</p>
+<p>Заголовок - {{post.title}}</p>
+<p>Текст - {{post.text}}</p>
+
+{% thumbnail post.image '300x300' as img %}
+<img src="{{img.url}}" height="{{img.height}}" width="{{img.width}}">
+{% endthumbnail %}
+
+<p>Дата и время создания - {{post.created_date_time}}</p>
+<p>Дата публикации - {{post.publication_date}}</p>
+{% endblock content %}
