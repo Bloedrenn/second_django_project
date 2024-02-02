@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
 
@@ -21,14 +21,6 @@ def get_posts(request):
     context = {'menu': menu, 'title': title, 'posts': posts}
 
     return render(request, template_name='main/posts.html', context=context)
-
-
-def index_root(request):
-    title = 'Главная страница'
-
-    context = {'menu': menu, 'title': title}
-
-    return render(request, 'main/index_root.html', context=context)
 
 
 def index(request):
@@ -60,7 +52,8 @@ def create_post(request):
             
             post.publish()
 
-            return get_posts(request)
+            return redirect('/posts/') #
+            # -return get_posts(request)
         
 
 def get_post(request, pk):
