@@ -52,8 +52,7 @@ def create_post(request):
             
             post.publish()
 
-            return redirect('/posts/') #
-            # -return get_posts(request)
+            return redirect('/posts/')
         
 
 def get_post(request, pk):
