@@ -34,7 +34,3 @@ class UserRegistrationForm(forms.ModelForm):
             'last_name': 'Фамилия',
             'email': 'Электронная почта'
         }
-
-        widgets = {
-            'username': forms.Textarea
-        }

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
 
@@ -29,6 +31,7 @@ def index(request):
     return render(request, 'main/index.html', context={'menu': menu, 'title': title})
 
 
+@login_required
 def create_post(request):
     if request.method == 'GET':
         form = PostForm()
@@ -45,14 +48,16 @@ def create_post(request):
         if form.is_valid():
             post = Post()
 
-            post.author = form.cleaned_data['author']
+            post.author = request.user
             post.title = form.cleaned_data['title']
             post.text = form.cleaned_data['text']
             post.image = form.cleaned_data['image']
             
             post.publish()
 
-            return redirect('/posts/')
+            url = reverse('main:get_posts')
+
+            return redirect(url)
         
 
 def get_post(request, pk):
