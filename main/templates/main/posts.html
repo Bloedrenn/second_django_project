@@ -11,7 +11,7 @@
     </tr>
     {% for post in posts %}
     <tr>
-        <td align='center'>{{post.author}}</td>
+        <td align='center'><a href="{% url 'users:get_user_info' pk=post.author.id %}">{{post.author}}</a></td>
         <td align='center'><a href="{% url 'main:get_post' pk=post.id %}">{{post.title}}</a></td>
         <td align='center'>{{post.text}}</td>
         <td align='center'>{{post.created_date_time}}</td>
