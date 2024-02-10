@@ -60,6 +60,47 @@ def create_post(request):
             return redirect(url)
         
 
+def edit_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+
+        if form.is_valid():
+            form.save()
+        
+            return redirect('main:get_post', pk=pk)
+        
+    elif request.method == 'GET':
+        form = PostForm(instance=post)
+
+        title = 'Редактировать пост'
+
+        context = {'menu': menu, 'title': title, 'form': form}
+
+        return render(request, 'main/edit_post.html', context)
+    
+
+def delete_post(request, pk):
+    post = Post.objects.filter(pk=pk).first()
+    
+    if request.method == 'GET':
+        title = 'Удалить пост'
+
+        context = {'menu': menu, 'title': title}
+
+        return render(request, 'main/delete_post.html', context)
+
+    elif request.method == 'POST':
+        if "delete" in request.POST:
+            post.delete()
+
+            return redirect('main:get_posts')
+        
+        elif "cancel" in request.POST:
+            return redirect('main:get_post', pk)
+        
+
 def get_post(request, pk):
     post = Post.objects.get(pk=pk)
 
