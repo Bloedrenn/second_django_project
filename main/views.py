@@ -3,6 +3,7 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+# from django.db.models import Q
 
 # Create your views here.
 
@@ -15,8 +16,11 @@ menu = [
 ]
 
 
-def get_posts(request):
-    posts = Post.objects.all()
+def get_posts(request, query_results=None):
+    if query_results is None:
+        posts = Post.objects.all()
+    else:
+        posts = query_results
 
     title = 'Посты'
 
@@ -109,6 +113,19 @@ def get_post(request, pk):
     context = {'menu': menu, 'title': title, 'post': post}
 
     return render(request, 'main/post.html', context=context)
+
+
+def search(request):
+    query = request.GET.get('query')
+    
+    # Фильтрация по заголовку и тексту поста
+    # title_text_filter = Q(title__contains=query) | Q(text__contains=query)
+    #
+    # query_results = Post.objects.filter(title_text_filter)
+
+    query_results = Post.objects.filter(author__username=query)
+
+    return get_posts(request, query_results)
 
 
 def contacts(request):

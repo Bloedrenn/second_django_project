@@ -1,6 +1,13 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+<div align="center">
+    <form action="{% url 'main:search' %}" method="GET">
+        <input type="text" name="query">
+        <button type="submit">Найти</button>
+    </form>
+<div>
+
 <table border=1 align='center'>
     <tr>
         <th>Автор</th>
