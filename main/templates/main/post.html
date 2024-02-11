@@ -16,4 +16,12 @@
 
 <p>Дата и время создания - {{post.created_date_time}}</p>
 <p>Дата публикации - {{post.publication_date}}</p>
+
+<hr>
+
+{% if request.user == post.author or request.user.is_superuser %}
+<a href="{% url 'main:edit_post' pk=post.id %}">Редактировать</a>
+<br>
+<a href="{% url 'main:delete_post' pk=post.id %}">Удалить</a>
+{% endif %}
 {% endblock content %}

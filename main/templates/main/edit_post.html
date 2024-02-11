@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<h1>Внести изменения в пост</h1>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Применить изменения</button>
+</form>
+{% endblock content %}
